@@ -1,3 +1,4 @@
+/* THEMES */
 function setTheme(theme) {
   if (theme === "green") {
     document.documentElement.style.setProperty("--main", "#7CFF00");
@@ -12,3 +13,62 @@ function setTheme(theme) {
     document.documentElement.style.setProperty("--alt", "#7CFF00");
   }
 }
+
+/* SNOW EFFECT */
+const canvas = document.getElementById("snow");
+const ctx = canvas.getContext("2d");
+
+let w, h;
+let flakes = [];
+
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+class Snowflake {
+  constructor() {
+    this.x = Math.random() * w;
+    this.y = Math.random() * h;
+    this.r = Math.random() * 1.5 + 0.5;
+    this.vy = Math.random() * 1 + 0.3;
+    this.vx = Math.random() * 0.5 - 0.25;
+    this.alpha = Math.random() * 0.6 + 0.2;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(124,255,0,${this.alpha})`;
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = "rgba(180,0,255,0.8)";
+    ctx.fill();
+  }
+  update() {
+    this.y += this.vy;
+    this.x += this.vx;
+    if (this.y > h) {
+      this.y = -5;
+      this.x = Math.random() * w;
+    }
+  }
+}
+
+function initSnow() {
+  flakes = [];
+  for (let i = 0; i < 120; i++) {
+    flakes.push(new Snowflake());
+  }
+}
+initSnow();
+
+function animateSnow() {
+  ctx.clearRect(0, 0, w, h);
+  flakes.forEach(flake => {
+    flake.update();
+    flake.draw();
+  });
+  requestAnimationFrame(animateSnow);
+}
+animateSnow();
