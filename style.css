@@ -109,7 +109,7 @@ body {
 .santa-hat {
   position: absolute;
   width: 120px;       /* увеличиваем размер */
-  top: -30px;         /* смещаем выше, чтобы не залезала внутрь аватара */
+  top: -10px;         /* смещаем выше, чтобы не залезала внутрь аватара */
   left: -10px;        /* смещаем влево для наклона */
   transform-origin: bottom left;
   z-index: 2;
