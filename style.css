@@ -1,6 +1,8 @@
 :root {
-  --main: #7CFF00;
+  --main: #9aff00;
   --alt: #b36bff;
+  --bg1: #120018;
+  --bg2: #050008;
 }
 
 * {
@@ -11,75 +13,89 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: 'Orbitron', sans-serif;
-  background:
-    radial-gradient(circle at top, #120018, #040008);
+  background: radial-gradient(circle at top, var(--bg1), var(--bg2));
   color: var(--main);
   overflow-x: hidden;
 }
 
-/* SCAN LINES */
+/* ФОН */
+.bg-gradient {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(179,107,255,0.12), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(154,255,0,0.08), transparent 45%);
+  animation: glowMove 18s infinite alternate;
+  z-index: 0;
+}
+@keyframes glowMove { from { filter: blur(0px); } to { filter: blur(8px); } }
+
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(179,107,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(179,107,255,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.4;
+  z-index: 1;
+}
+
 .bg-lines {
   position: fixed;
   inset: 0;
   background:
     repeating-linear-gradient(
       to bottom,
-      rgba(180,0,255,0.04) 0px,
-      rgba(180,0,255,0.04) 1px,
+      rgba(179,107,255,0.04) 0px,
+      rgba(179,107,255,0.04) 1px,
       transparent 1px,
-      transparent 10px
+      transparent 9px
     );
-  animation: scan 10s linear infinite;
+  animation: scan 12s linear infinite;
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
 }
+@keyframes scan { from { background-position: 0 0; } to { background-position: 0 300px; } }
 
-@keyframes scan {
-  from { background-position: 0 0; }
-  to { background-position: 0 300px; }
-}
-
-/* NOISE */
 .noise {
   position: fixed;
   inset: 0;
   background: url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity: 0.06;
+  opacity: 0.07;
+  z-index: 3;
   pointer-events: none;
-  z-index: 1;
 }
 
-/* SNOW */
 #snow {
   position: fixed;
   inset: 0;
-  z-index: 2;
+  z-index: 4;
   pointer-events: none;
 }
 
-/* CONTAINER */
+/* КОНТЕЙНЕР */
 .container {
   max-width: 390px;
   margin: auto;
-  padding: 60px 20px;
+  padding: 70px 20px;
   text-align: center;
   position: relative;
-  z-index: 3;
+  z-index: 5;
 }
 
-/* AVATAR */
+/* АВАТАР */
 .avatar-ring {
   width: 150px;
   height: 150px;
-  margin: 0 auto 25px;
+  margin: 0 auto 28px;
   border-radius: 50%;
   border: 2px solid var(--alt);
-  box-shadow:
-    0 0 25px var(--alt),
-    0 0 60px rgba(124,255,0,0.4);
+  box-shadow: 0 0 25px var(--alt), 0 0 70px rgba(154,255,0,0.35);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .avatar {
@@ -89,30 +105,53 @@ body {
   object-fit: cover;
 }
 
+/* ШАПКА С АНИМАЦИЕЙ */
+.santa-hat {
+  position: absolute;
+  width: 80px;
+  top: -15px;
+  left: 10px;
+  transform-origin: bottom left;
+  z-index: 2;
+}
+
+/* swing-анимация */
+.swing {
+  animation: swing 2s ease-in-out infinite alternate;
+}
+@keyframes swing {
+  0% { transform: rotate(-25deg); }
+  50% { transform: rotate(-15deg); }
+  100% { transform: rotate(-20deg); }
+}
+
 /* PULSE */
 .pulse {
-  animation: pulse 3s infinite;
+  animation: pulse 3.5s infinite;
 }
-
 @keyframes pulse {
-  0% { box-shadow: 0 0 20px var(--alt); }
-  50% { box-shadow: 0 0 60px var(--main); }
-  100% { box-shadow: 0 0 20px var(--alt); }
+  0% { box-shadow: 0 0 25px var(--alt); }
+  50% { box-shadow: 0 0 80px var(--main); }
+  100% { box-shadow: 0 0 25px var(--alt); }
 }
 
-/* NAME + GLITCH */
+/* NAME */
 .name {
   font-size: 26px;
   letter-spacing: 5px;
-  text-shadow:
-    0 0 8px var(--main),
-    0 0 20px rgba(180,0,255,0.6);
+  text-shadow: 0 0 10px var(--main), 0 0 25px var(--alt);
 }
 
+.nick {
+  color: var(--alt);
+  margin-bottom: 35px;
+  letter-spacing: 3px;
+}
+
+/* GLITCH */
 .glitch {
   position: relative;
 }
-
 .glitch::before,
 .glitch::after {
   content: attr(data-text);
@@ -120,77 +159,32 @@ body {
   left: 0;
   width: 100%;
 }
+.glitch::before { color: var(--alt); animation: glitch1 3s infinite; }
+.glitch::after { color: var(--main); animation: glitch2 2.5s infinite; }
+@keyframes glitch1 { 30% { transform: translate(-2px, 1px); } }
+@keyframes glitch2 { 50% { transform: translate(2px, -1px); } }
 
-.glitch::before {
-  color: var(--alt);
-  animation: glitch1 2.5s infinite;
-}
-
-.glitch::after {
-  color: var(--main);
-  animation: glitch2 2s infinite;
-}
-
-@keyframes glitch1 {
-  0% { transform: translate(0); }
-  30% { transform: translate(-2px, 1px); }
-  60% { transform: translate(2px, -1px); }
-  100% { transform: translate(0); }
-}
-
-@keyframes glitch2 {
-  0% { transform: translate(0); }
-  40% { transform: translate(2px, 2px); }
-  80% { transform: translate(-2px, -2px); }
-  100% { transform: translate(0); }
-}
-
-.nick {
-  color: var(--alt);
-  margin-bottom: 30px;
-  letter-spacing: 3px;
-}
-
-/* CARDS */
+/* КАРТОЧКИ */
 .card {
-  border: 1px solid var(--main);
-  padding: 22px;
-  margin-bottom: 25px;
+  padding: 24px;
+  margin-bottom: 28px;
   background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(154,255,0,0.4);
 }
-
-.glow {
-  box-shadow:
-    inset 0 0 12px rgba(124,255,0,0.25),
-    0 0 25px rgba(180,0,255,0.35);
-}
-
-.card h2 {
-  color: var(--alt);
-  letter-spacing: 4px;
-}
-
-.price {
-  margin: 8px 0;
-  letter-spacing: 2px;
-}
+.soft { border-radius: 14px; }
+.glow { box-shadow: inset 0 0 20px rgba(154,255,0,0.18), 0 0 35px rgba(179,107,255,0.35); }
+.card h2 { color: var(--alt); letter-spacing: 4px; }
+.price { margin: 9px 0; letter-spacing: 2px; }
 
 /* TELEGRAM */
 .tg-btn {
   display: block;
-  margin: 30px auto;
-  padding: 14px;
+  margin: 35px auto 0;
+  padding: 16px;
+  border-radius: 14px;
   border: 1px solid var(--alt);
   color: var(--alt);
   text-decoration: none;
-  box-shadow: 0 0 25px var(--alt);
-}
-
-/* THEMES */
-.themes button {
-  margin: 6px;
-  padding: 6px 12px;
-  background: none;
-  border: 1px solid var(--main);
-  color: var(--main);
-}
+  box-shadow: 0 0 30px rgba(179,107,255,0.6);
+  }
+  
