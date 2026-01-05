@@ -105,27 +105,6 @@ body {
   object-fit: cover;
 }
 
-/* ШАПКА С АНИМАЦИЕЙ - ОБНОВЛЕННАЯ */
-.santa-hat {
-  position: absolute;
-  width: 120px;       /* увеличиваем размер */
-  top: -10px;         /* смещаем выше, чтобы не залезала внутрь аватара */
-  left: -10px;        /* смещаем влево для наклона */
-  transform-origin: bottom left;
-  z-index: 2;
-}
-
-/* swing-анимация */
-.swing {
-  animation: swing 2s ease-in-out infinite alternate;
-}
-
-@keyframes swing {
-  0% { transform: rotate(-25deg); }
-  50% { transform: rotate(-15deg); }
-  100% { transform: rotate(-20deg); }
-}
-
 /* PULSE */
 .pulse {
   animation: pulse 3.5s infinite;
