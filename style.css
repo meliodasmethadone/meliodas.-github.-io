@@ -1,3 +1,8 @@
+:root {
+  --main: #7CFF00;
+  --alt: #b36bff;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -6,52 +11,72 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: 'Orbitron', sans-serif;
-  background: radial-gradient(circle at top, #0b0015, #030008);
-  color: #7CFF00;
+  background:
+    radial-gradient(circle at top, #120018, #040008);
+  color: var(--main);
   overflow-x: hidden;
 }
 
-/* СКАН-ЛИНИИ */
+/* SCAN LINES */
 .bg-lines {
   position: fixed;
   inset: 0;
   background:
     repeating-linear-gradient(
       to bottom,
-      rgba(124,255,0,0.08) 0px,
-      rgba(124,255,0,0.08) 1px,
+      rgba(180,0,255,0.04) 0px,
+      rgba(180,0,255,0.04) 1px,
       transparent 1px,
-      transparent 6px
+      transparent 10px
     );
-  animation: scan 6s linear infinite;
+  animation: scan 10s linear infinite;
   pointer-events: none;
+  z-index: 0;
 }
 
 @keyframes scan {
   from { background-position: 0 0; }
-  to   { background-position: 0 220px; }
+  to { background-position: 0 300px; }
 }
 
+/* NOISE */
+.noise {
+  position: fixed;
+  inset: 0;
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* SNOW */
+#snow {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* CONTAINER */
 .container {
   max-width: 390px;
-  margin: 0 auto;
-  padding: 55px 20px;
+  margin: auto;
+  padding: 60px 20px;
   text-align: center;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
-/* АВАТАР */
+/* AVATAR */
 .avatar-ring {
   width: 150px;
   height: 150px;
   margin: 0 auto 25px;
   border-radius: 50%;
-  border: 3px solid #7CFF00;
+  border: 2px solid var(--alt);
   box-shadow:
-    0 0 20px #7CFF00,
-    0 0 40px rgba(124,255,0,0.6),
-    0 0 70px rgba(180,0,255,0.4);
+    0 0 25px var(--alt),
+    0 0 60px rgba(124,255,0,0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,117 +89,28 @@ body {
   object-fit: cover;
 }
 
-/* ИМЯ */
-.name {
-  font-size: 22px;
-  letter-spacing: 4px;
-  text-shadow:
-    0 0 10px #7CFF00,
-    0 0 25px rgba(180,0,255,0.8);
-  margin-bottom: 10px;
-}
-
-.nick {
-  font-size: 12px;
-  letter-spacing: 3px;
-  color: #b36bff;
-  opacity: 0.85;
-  margin-bottom: 35px;
-}
-
-/* КАРТОЧКИ */
-.card {
-  border: 1px solid #7CFF00;
-  padding: 22px;
-  margin-bottom: 28px;
-  box-shadow:
-    inset 0 0 15px rgba(124,255,0,0.4),
-    0 0 20px rgba(180,0,255,0.5);
-  position: relative;
-  background: rgba(10,0,20,0.4);
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(180,0,255,0.3);
-  filter: blur(6px);
-}
-
-.card h2 {
-  margin-top: 0;
-  margin-bottom: 18px;
-  letter-spacing: 4px;
-  font-size: 18px;
-  color: #b36bff;
-  text-shadow: 0 0 10px #b36bff;
-}
-
-.price {
-  margin: 8px 0;
-  font-size: 13px;
-  letter-spacing: 2px;
-  color: #7CFF00;
-  text-shadow: 0 0 8px rgba(124,255,0,0.8);
-}
-}
-
-/* NOISE */
-.noise {
-  position: fixed;
-  inset: 0;
-  background: url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity: 0.08;
-  pointer-events: none;
-}
-
-.container {
-  max-width: 390px;
-  margin: auto;
-  padding: 60px 20px;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
-
-/* AVATAR */
-.avatar-ring {
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 25px;
-  border-radius: 50%;
-  border: 3px solid var(--main);
-  box-shadow:
-    0 0 25px var(--main),
-    0 0 60px var(--alt);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.avatar {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-}
-
 /* PULSE */
 .pulse {
-  animation: pulse 2.5s infinite;
+  animation: pulse 3s infinite;
 }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 20px var(--main); }
-  50% { box-shadow: 0 0 60px var(--alt); }
-  100% { box-shadow: 0 0 20px var(--main); }
+  0% { box-shadow: 0 0 20px var(--alt); }
+  50% { box-shadow: 0 0 60px var(--main); }
+  100% { box-shadow: 0 0 20px var(--alt); }
 }
 
-/* GLITCH */
-.glitch {
-  position: relative;
+/* NAME + GLITCH */
+.name {
   font-size: 26px;
   letter-spacing: 5px;
+  text-shadow:
+    0 0 8px var(--main),
+    0 0 20px rgba(180,0,255,0.6);
+}
+
+.glitch {
+  position: relative;
 }
 
 .glitch::before,
@@ -183,37 +119,36 @@ body {
   position: absolute;
   left: 0;
   width: 100%;
-  opacity: 0.8;
 }
 
 .glitch::before {
   color: var(--alt);
-  animation: glitch1 2s infinite;
+  animation: glitch1 2.5s infinite;
 }
 
 .glitch::after {
   color: var(--main);
-  animation: glitch2 1.5s infinite;
+  animation: glitch2 2s infinite;
 }
 
 @keyframes glitch1 {
   0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
+  30% { transform: translate(-2px, 1px); }
+  60% { transform: translate(2px, -1px); }
   100% { transform: translate(0); }
 }
 
 @keyframes glitch2 {
   0% { transform: translate(0); }
-  25% { transform: translate(2px, -2px); }
-  50% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, 2px); }
+  80% { transform: translate(-2px, -2px); }
   100% { transform: translate(0); }
 }
 
 .nick {
   color: var(--alt);
   margin-bottom: 30px;
+  letter-spacing: 3px;
 }
 
 /* CARDS */
@@ -221,13 +156,18 @@ body {
   border: 1px solid var(--main);
   padding: 22px;
   margin-bottom: 25px;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.35);
 }
 
 .glow {
   box-shadow:
-    inset 0 0 15px rgba(124,255,0,0.4),
-    0 0 25px rgba(180,0,255,0.6);
+    inset 0 0 12px rgba(124,255,0,0.25),
+    0 0 25px rgba(180,0,255,0.35);
+}
+
+.card h2 {
+  color: var(--alt);
+  letter-spacing: 4px;
 }
 
 .price {
@@ -235,30 +175,22 @@ body {
   letter-spacing: 2px;
 }
 
-/* TG BUTTON */
+/* TELEGRAM */
 .tg-btn {
   display: block;
   margin: 30px auto;
   padding: 14px;
-  border: 1px solid var(--main);
-  color: var(--main);
+  border: 1px solid var(--alt);
+  color: var(--alt);
   text-decoration: none;
-  box-shadow: 0 0 20px var(--main);
+  box-shadow: 0 0 25px var(--alt);
 }
 
 /* THEMES */
 .themes button {
   margin: 6px;
+  padding: 6px 12px;
   background: none;
-  border: 1px solid var(--alt);
-  color: var(--alt);
-  padding: 6px 10px;
-}
-
-/* SNOW */
-#snow {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
+  border: 1px solid var(--main);
+  color: var(--main);
 }
