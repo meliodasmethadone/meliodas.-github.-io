@@ -33,18 +33,20 @@ class Snowflake {
     this.x = Math.random() * w;
     this.y = Math.random() * h;
     this.r = Math.random() * 1.5 + 0.5;
-    this.vy = Math.random() * 1 + 0.3;
-    this.vx = Math.random() * 0.5 - 0.25;
-    this.alpha = Math.random() * 0.6 + 0.2;
+    this.vy = Math.random() * 0.8 + 0.3;
+    this.vx = Math.random() * 0.4 - 0.2;
+    this.alpha = Math.random() * 0.5 + 0.3;
   }
+
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(124,255,0,${this.alpha})`;
-    ctx.shadowBlur = 10;
-    ctx.shadowColor = "rgba(180,0,255,0.8)";
+    ctx.fillStyle = `rgba(180,0,255,${this.alpha})`;
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = "rgba(124,255,0,0.6)";
     ctx.fill();
   }
+
   update() {
     this.y += this.vy;
     this.x += this.vx;
@@ -61,14 +63,16 @@ function initSnow() {
     flakes.push(new Snowflake());
   }
 }
-initSnow();
 
 function animateSnow() {
   ctx.clearRect(0, 0, w, h);
-  flakes.forEach(flake => {
-    flake.update();
-    flake.draw();
+  flakes.forEach(f => {
+    f.update();
+    f.draw();
   });
   requestAnimationFrame(animateSnow);
 }
+
+initSnow();
 animateSnow();
+  
