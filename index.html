@@ -10,30 +10,53 @@
 </head>
 <body>
 
+<!-- ФОН -->
 <div class="bg-lines"></div>
 <div class="noise"></div>
+<canvas id="snow"></canvas>
 
 <div class="container">
 
+  <!-- АВАТАР -->
   <div class="avatar-ring pulse">
     <img src="avatar.jpg" class="avatar">
   </div>
 
+  <!-- ИМЯ -->
   <h1 class="name glitch" data-text="Meliodas">Meliodas</h1>
   <div class="nick">@MELIODASMETHADONE</div>
 
+  <!-- КАРТОЧКА -->
   <div class="card glow">
     КАСТА OSINT
   </div>
 
   <div class="card glow">
-    <h2>ЦЕНЫ</h2>
-    <div class="price">МЕСЯЦ — 550₽</div>
-    <div class="price">3 МЕСЯЦА — 1250₽</div>
-    <div class="price">6 МЕСЯЦЕВ — 1700₽</div>
-    <div class="price">ГОД — 2500₽</div>
-    <div class="price">НАВСЕГДА — 5000₽</div>
+    <h2>PRICE</h2>
+    <div class="price">МЕСЯЦ — 300₽</div>
+    <div class="price">3 МЕСЯЦА — 750₽</div>
+    <div class="price">6 МЕСЯЦЕВ — 1200₽</div>
+    <div class="price">ГОД — 1800₽</div>
+    <div class="price">НАВСЕГДА — 3000₽</div>
   </div>
+
+  <!-- TELEGRAM -->
+  <a class="tg-btn" href="https://t.me/meliodasmethadone" target="_blank">
+    TELEGRAM
+  </a>
+
+  <!-- ТЕМЫ -->
+  <div class="themes">
+    <button onclick="setTheme('green')">GREEN</button>
+    <button onclick="setTheme('red')">RED</button>
+    <button onclick="setTheme('purple')">PURPLE</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
 
   <a class="tg-btn" href="https://t.me/meliodasmethadone" target="_blank">
     TELEGRAM
