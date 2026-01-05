@@ -254,3 +254,11 @@ body {
   color: var(--alt);
   padding: 6px 10px;
 }
+
+/* SNOW */
+#snow {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
